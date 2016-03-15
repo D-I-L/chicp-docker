@@ -1,0 +1,4 @@
+elasticsearch/esdata/*
+elasticsearch/esrepo/*
+.project
+.pydevproject

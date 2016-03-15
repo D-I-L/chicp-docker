@@ -1,0 +1,64 @@
+version: '2'
+services:
+ postgres:
+  restart: always
+  image: postgres:latest
+  environment:
+   POSTGRES_USER: webuser
+   POSTGRES_PASSWORD: webuser
+   POSTGRES_DB: chicp_authdb
+  volumes_from:
+   - data
+  volumes:
+   - ./postgres/:/usr/src/app/postgres/
+
+ chicp:
+  build: ./chicp
+  entrypoint: sh /usr/src/app/chicp/entrypoint.sh
+  volumes:
+   - /usr/src/app/projCHICP
+   - ./chicp/:/usr/src/app/chicp/
+   - ./chicp/requirements.txt:/usr/src/app/chicp/requirements.txt
+   - ./chicp/settings.py:/usr/src/app/projCHICP/projCHICP/settings.py
+   - ./chicp/settings_secret.py:/usr/src/app/projCHICP/projCHICP/settings_secret.py
+   - ./chicp/urls.py:/usr/src/app/projCHICP/projCHICP/urls.py
+   - ./chicp/chicp_settings.py:/usr/src/app/src/chicp/chicp/chicp_settings.py
+   - ./chicp/chicp_urls.py:/usr/src/app/src/chicp/chicp/urls.py
+   - ./chicp/data/:/usr/src/app/projCHICP/projCHICP/apache/chicp/data/
+   - ./chicp/bin/bigBedToBed:/usr/local/bin/bigBedToBed
+  ports:
+   - "8000:8000"
+  depends_on:
+   - postgres
+   - cp_elasticsearch
+
+ cp_elasticsearch:
+  restart: always
+  image: elasticsearch:2.2.0
+  volumes:
+   - ./elasticsearch/config:/usr/share/elasticsearch/config
+   - ./elasticsearch/esdata:/usr/share/elasticsearch/data
+   - ./elasticsearch/esrepo:/usr/share/elasticsearch/repo
+  cap_add:
+   - IPC_LOCK
+  ulimits:
+   memlock: -1
+  environment:
+   - ES_HEAP_SIZE=2g
+  user: elasticsearch
+
+ nginx:
+  restart: always
+  build: ./nginx/
+  ports:
+   - "80:80"
+  volumes_from:
+   - chicp
+  links:
+   - chicp:chicp
+
+ data:
+  image: postgres:latest
+  volumes:
+   - /var/lib/postgresql
+  command: echo "postgres data volume"

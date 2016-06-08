@@ -24,8 +24,9 @@ services:
    - ./chicp/urls.py:/usr/src/app/projCHICP/projCHICP/urls.py
    - ./chicp/chicp_settings.py:/usr/src/app/src/chicp/chicp/chicp_settings.py
    - ./chicp/chicp_urls.py:/usr/src/app/src/chicp/chicp/urls.py
-   - ./chicp/data/:/usr/src/app/projCHICP/projCHICP/apache/chicp/data/
    - ./chicp/bin/bigBedToBed:/usr/local/bin/bigBedToBed
+   - ./chicp/data/elastic_load_files/:/tmp/elastic_load_files/
+   - ./chicp/data/bigbed/:/usr/src/app/projCHICP/projCHICP/apache/chicp/data/
   ports:
    - "8000:8000"
   depends_on:

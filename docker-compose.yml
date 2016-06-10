@@ -10,23 +10,21 @@ services:
   volumes_from:
    - data
   volumes:
-   - ./postgres/:/usr/src/app/postgres/
+   - ./postgres/chicp_authdb.sql:/docker-entrypoint-initdb.d/chicp_authdb.sql
 
  chicp:
   build: ./chicp
   entrypoint: sh /usr/src/app/chicp/entrypoint.sh
   volumes:
    - /usr/src/app/projCHICP
-   - ./chicp/:/usr/src/app/chicp/
-   - ./chicp/requirements.txt:/usr/src/app/chicp/requirements.txt
-   - ./chicp/settings.py:/usr/src/app/projCHICP/projCHICP/settings.py
-   - ./chicp/settings_secret.py:/usr/src/app/projCHICP/projCHICP/settings_secret.py
-   - ./chicp/urls.py:/usr/src/app/projCHICP/projCHICP/urls.py
-   - ./chicp/chicp_settings.py:/usr/src/app/src/chicp/chicp/chicp_settings.py
-   - ./chicp/chicp_urls.py:/usr/src/app/src/chicp/chicp/urls.py
-   - ./chicp/bin/bigBedToBed:/usr/local/bin/bigBedToBed
-   - ./chicp/data/elastic_load_files/:/tmp/elastic_load_files/
-   - ./chicp/data/bigbed/:/usr/src/app/projCHICP/projCHICP/apache/chicp/data/
+   - ./chicp_settings/settings.py:/usr/src/app/projCHICP/projCHICP/settings.py
+   - ./chicp_settings/settings_secret.py:/usr/src/app/projCHICP/projCHICP/settings_secret.py
+   - ./chicp_settings/urls.py:/usr/src/app/projCHICP/projCHICP/urls.py
+   - ./chicp_settings/chicp_settings.py:/usr/src/app/src/chicp/chicp/chicp_settings.py
+   - ./chicp_settings/chicp_urls.py:/usr/src/app/src/chicp/chicp/urls.py
+   - ./chicp_settings/bin/bigBedToBed:/usr/local/bin/bigBedToBed
+   - ../data/bigbed/:/usr/src/app/projCHICP/projCHICP/apache/chicp/data/
+   - ../data/elastic_load_files/:/tmp/elastic_load_files/
   ports:
    - "8000:8000"
   depends_on:

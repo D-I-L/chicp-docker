@@ -14,7 +14,7 @@ services:
 
  chicp:
   build: ./chicp
-  entrypoint: sh /usr/src/app/chicp/entrypoint.sh
+  entrypoint: sh /usr/src/app/entrypoint.sh
   volumes:
    - /usr/src/app/projCHICP
    - ./chicp_settings/settings.py:/usr/src/app/projCHICP/projCHICP/settings.py

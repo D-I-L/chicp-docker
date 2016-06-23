@@ -34,8 +34,8 @@ services:
   image: elasticsearch:2.2.0
   volumes:
    - ./elasticsearch/config:/usr/share/elasticsearch/config ## comment out for mac
-   - ./elasticsearch/esdata:/usr/share/elasticsearch/data
-   - ./elasticsearch/esrepo:/usr/share/elasticsearch/repo
+   - ../data/elasticsearch/esdata:/usr/share/elasticsearch/data
+   - ../data/elasticsearch/esrepo:/usr/share/elasticsearch/repo
   cap_add:
    - IPC_LOCK
   ulimits:

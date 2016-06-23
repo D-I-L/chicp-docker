@@ -45,6 +45,9 @@ ELASTIC = {
     'default': {
         'ELASTIC_URL': ['http://cp_elasticsearch:9200/'],
         'IDX': {
+		'MARKER': {
+               'name': 'dbsnp138'
+           	},
                 'CP_STATS_UD': {
                 'name': 'cp:hg19_userdata_bed',
                 'label': 'User Data',

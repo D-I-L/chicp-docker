@@ -6,7 +6,7 @@
 #psycopg2==2.6.1
 gunicorn==19.3.0
 
--e git+https://github.com/D-I-L/django-chicp.git@v1.1.2#egg=chicp
+-e git+https://github.com/D-I-L/django-chicp.git@v1.1.3#egg=chicp
 #-e git+https://github.com/btel/svg_utils.git#egg=svgutils
 #-e git+https://github.com/D-I-L/django-elastic.git#egg=elastic
 #-e git+https://github.com/D-I-L/django-pydgin-auth.git#egg=pydgin_auth

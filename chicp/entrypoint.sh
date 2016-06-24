@@ -12,6 +12,8 @@ python projCHICP/manage.py migrate
 #python projCHICP/manage.py migrate --fake-intial
 python projCHICP/manage.py makemigrations elastic
 python projCHICP/manage.py migrate elastic
+
+cp robots.txt /usr/src/app/projCHICP/projCHICP/static/
 python projCHICP/manage.py collectstatic --noinput
 
 #subs for elastic2

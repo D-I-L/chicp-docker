@@ -50,7 +50,11 @@ services:
   restart: always
   build: ./nginx/
   ports:
+   - "443:443"
    - "80:80"
+  volumes:
+   - ./nginx/ssl/:/etc/nginx/ssl/
+   - ./nginx/sites-enabled:/etc/nginx/conf.d/
   volumes_from:
    - chicp
   links:
